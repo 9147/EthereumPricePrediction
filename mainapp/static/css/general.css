@@ -1,0 +1,45 @@
+.model-selection {
+    display: flex;
+    min-height: 200px;
+    font-size: 2rem;
+    font-family: monospace;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+.result-model {
+    border: solid 1px white;
+    border-radius: .2rem;
+    padding: 2rem;
+    width: 13rem;
+}
+
+::-webkit-datetime-edit {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 1em;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+    background: silver;
+    border-radius: .2rem;
+}
+
+::-webkit-datetime-edit-text {
+    padding: 0 0.3em;
+    border-radius: 2rem;
+}
+
+
+::-webkit-inner-spin-button {
+    display: block;
+}
+
+::-webkit-calendar-picker-indicator {
+    color: white;
+    cursor: pointer;
+    font-size: 1.3em;
+    padding: 0.3em;
+}
