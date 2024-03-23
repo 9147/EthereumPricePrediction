@@ -29,8 +29,8 @@ random_forest_model.fit(X, y)
 extra_trees_model = ExtraTreesRegressor()
 extra_trees_model.fit(X, y)
 
-# Function to predict Ethereum price for future dates using Random Forest
-def predict_price_for_future_random_forest(date):
+# Function to predict Ethereum price, high, and low for future dates using Random Forest
+def predict_prices_for_future_random_forest(date):
     # Preprocess input date provided by the user
     date = pd.to_datetime(date, dayfirst=True)
     year = date.year
@@ -40,8 +40,38 @@ def predict_price_for_future_random_forest(date):
     
     # Make prediction
     features_for_date = [[ethereum_data.iloc[-1]['Open'], ethereum_data.iloc[-1]['High'], ethereum_data.iloc[-1]['Low'], year, month, day, weekday]]
-    predicted_price = random_forest_model.predict(features_for_date)
+    predicted_price = random_forest_model.predict(features_for_date)[0]
+    predicted_high = predicted_price + 100  # Example adjustment for high
+    predicted_low = predicted_price - 100  # Example adjustment for low
+    return predicted_price, predicted_high, predicted_low
 
-    return predicted_price[0]
+# Function to predict Ethereum price, high, and low for future dates using Extra Trees
+def predict_prices_for_future_extra_trees(date):
+    # Preprocess input date provided by the user
+    date = pd.to_datetime(date, dayfirst=True)
+    year = date.year
+    month = date.month
+    day = date.day
+    weekday = date.weekday()
+    
+    # Make prediction
+    features_for_date = [[ethereum_data.iloc[-1]['Open'], ethereum_data.iloc[-1]['High'], ethereum_data.iloc[-1]['Low'], year, month, day, weekday]]
+    predicted_price = extra_trees_model.predict(features_for_date)[0]
+    predicted_high = predicted_price + 100  # Example adjustment for high
+    predicted_low = predicted_price - 100  # Example adjustment for low
+    return predicted_price, predicted_high, predicted_low
 
-print(predict_price_for_future_random_forest('2022-01-01'))
+# # Get user input for the future date
+# future_date = input("Enter the future date to predict (YYYY-MM-DD): ")
+
+# # Predict Ethereum price, high, and low for the future date using Random Forest
+# predicted_price_rf, predicted_high_rf, predicted_low_rf = predict_prices_for_future_random_forest(future_date)
+# print("Predicted Ethereum price for", future_date, "using Random Forest is:", predicted_price_rf)
+# print("Predicted Ethereum high for", future_date, "using Random Forest is:", predicted_high_rf)
+# print("Predicted Ethereum low for", future_date, "using Random Forest is:", predicted_low_rf)
+
+# # Predict Ethereum price, high, and low for the future date using Extra Trees
+# predicted_price_et, predicted_high_et, predicted_low_et = predict_prices_for_future_extra_trees(future_date)
+# print("Predicted Ethereum price for", future_date, "using Extra Trees is:", predicted_price_et)
+# print("Predicted Ethereum high for", future_date, "using Extra Trees is:", predicted_high_et)
+# print("Predicted Ethereum low for", future_date, "using Extra Trees is:", predicted_low_et)

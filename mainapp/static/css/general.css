@@ -1,13 +1,20 @@
 .model-selection {
     display: flex;
+    gap: 2rem;
     min-height: 200px;
     font-size: 2rem;
     font-family: monospace;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-around;
     align-items: center;
+}
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 .result-model {
     border: solid 1px white;
